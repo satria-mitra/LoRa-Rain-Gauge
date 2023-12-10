@@ -5,11 +5,10 @@
 #include <SPI.h>
 #include <SD.h>
 
-#define debugSerial Serial
+// Secret file for storing AppEUI and Appkey of TTN App
+#include "arduino_secrets.h"
 
-// Set your AppEUI and AppKey for TTN App
-const char *appEui = "0000000000000000";
-const char *appKey = "<YOUR-APP_KEY>";
+#define debugSerial Serial
 
 RTC_DS3231 rtc;
 
