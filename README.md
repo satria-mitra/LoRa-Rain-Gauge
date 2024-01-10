@@ -1,17 +1,7 @@
-LoRa Rain Gauge with RTC (Real-Time Clock) and SD Card Logger
+LoRa Rain Gauge
 =============================================================
 
 This repository contains an Arduino sketch for a rain gauge system that utilizes LoRa communication, RTC for timestamping, and an SD card for data logging.
-
-Overview
---------
-
-The system includes the following components:
-
-*   **LoRa Communication:** Utilizes the MKRWAN library for sending rain gauge data via LoRaWAN to The Things Network (TTN).
-*   **Real-Time Clock (RTC):** Integrated DS3231 RTC to timestamp rain data accurately.
-*   **SD Card Logging:** Records rain gauge data locally on an SD card for backup and storage purposes.
-*   **Rain Measurement:** Utilizes a reed switch to count pulses, converting them into measured rainfall.
 
 Hardware Requirements
 ---------------------
@@ -59,10 +49,17 @@ Troubleshooting
 *   If encountering issues during LoRa connection, ensure proper positioning for signal reception.
 *   Verify wiring connections and component compatibility.
 
-Contributing
-------------
+Future Work
+---------------
 
-Feel free to contribute by forking this repository, making enhancements, and creating a pull request.
+*   Use low power library
+*   Design a watertight enclosure
+  
+Reflective learning
+------------
+*   Prototype and iterate to make it better
+*   Outdoor device need a waterproof and watertight material
+
 
 License
 -------
@@ -73,4 +70,4 @@ Acknowledgements
 ----------------
 
 *   Arduino community
-*   Libraries used: RTClib, MKRWAN, ArduinoLowPower, SD
+*   Libraries used: RTClib, MKRWAN, SD
