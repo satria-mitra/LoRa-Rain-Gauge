@@ -99,7 +99,8 @@ Satria Mitra Utama
 ## Future Work
 - Use low power library
 - Design a watertight enclosure
-- Reflective learning
+
+## Reflective learning
 - Prototype and iterate to make it better
 - Outdoor device needs a waterproof and watertight material
 
