@@ -15,6 +15,7 @@ Satria Mitra Utama
 4. Reed switch for rainfall measurement
 5. 5mm Neodymum magnet
 6. Printed Rain Gauge
+7. 25mm screw with diameter 2mm
 7. Lot of wires
 
 ### Optional Hardwares
@@ -53,6 +54,16 @@ Satria Mitra Utama
 |4   | Charger | JST +        | JST +        |
 |    |          | JST-         | JST -       |
 
+2. **Rain Gauge**:
+   - Print these files using PLA (not waterproof) or PETG(waterproof) filament 
+     - rain_gauge-can.stl
+     - rain_gauge-bucket.stl
+     - rain_gauge-base.stl
+   - Insert your 5mm neodymum magnet into the side hole of bucket
+   - Use long shaft/screw to insert the bucket into the base
+   - Plug the reed switch module into base. Final piece of Rain Gauge should looks like this
+   
+   ![Alt text](Assets/Pictures/reed_switch.jpeg)
 
 2. **Libraries**: Install the necessary libraries (Wire, RTClib, MKRWAN, SPI, SD) in the Arduino IDE.
 3. **TTN Application**:
@@ -106,6 +117,9 @@ Satria Mitra Utama
 
 ## License
 This project is licensed under the MIT License.
+
+## Credits
+- Dusan DJ for his awesome tipping buckets
 
 ## Acknowledgements
 - Arduino community
