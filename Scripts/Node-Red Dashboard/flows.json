@@ -1,0 +1,300 @@
+[
+    {
+        "id": "42e0e1b0254ccefa",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7942ba6b74e2b9c8",
+        "type": "mqtt in",
+        "z": "42e0e1b0254ccefa",
+        "name": "",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "86d2642428f5be6e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 80,
+        "wires": [
+            [
+                "72128a1230d714df",
+                "bce24997e99ffa35"
+            ]
+        ]
+    },
+    {
+        "id": "72128a1230d714df",
+        "type": "function",
+        "z": "42e0e1b0254ccefa",
+        "name": "function 1",
+        "func": "// Assuming msg.payload contains the JSON data\nvar data = msg.payload;\n\n// Extracting required values\nvar device_id = data?.end_device_ids?.device_id;\nvar rain = data?.uplink_message?.decoded_payload?.rain;\nvar rssi = data?.uplink_message?.rx_metadata[0]?.rssi; // Assuming you want the RSSI of the first gateway\nvar snr = data?.uplink_message?.rx_metadata[1]?.snr;\nvar time = data?.uplink_message?.rx_metadata[1]?.time;\n\n// Check if the values are available\nif (device_id === undefined || rain === undefined || rssi === undefined) {\n    node.error(\"Required data not found in the JSON\");\n    return null; // Stop the flow if any data is not found\n}\n\n// Set the extracted values to the payload\nmsg.payload = {\n    device_id: device_id,\n    rain: rain,\n    rssi: rssi,\n    snr,\n    time,\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 80,
+        "wires": [
+            [
+                "3fd465f4d72a8bf8",
+                "42f6e977f7d615c4",
+                "9ced6146e401b2d3",
+                "ede57366073af8ec"
+            ]
+        ]
+    },
+    {
+        "id": "3fd465f4d72a8bf8",
+        "type": "ui_chart",
+        "z": "42e0e1b0254ccefa",
+        "name": "",
+        "group": "5870b7d77809fcf3",
+        "order": 0,
+        "width": "6",
+        "height": "8",
+        "label": "Rainfall (mm)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 450,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "42f6e977f7d615c4",
+        "type": "ui_numeric",
+        "z": "42e0e1b0254ccefa",
+        "name": "",
+        "label": "numeric",
+        "tooltip": "",
+        "group": "5870b7d77809fcf3",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "step": 1,
+        "className": "",
+        "x": 440,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9ced6146e401b2d3",
+        "type": "ui_text",
+        "z": "42e0e1b0254ccefa",
+        "group": "5870b7d77809fcf3",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 550,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "bce24997e99ffa35",
+        "type": "json",
+        "z": "42e0e1b0254ccefa",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 210,
+        "y": 280,
+        "wires": [
+            [
+                "b9fdf8359ae11942",
+                "425dfc7e2dca7f16"
+            ]
+        ]
+    },
+    {
+        "id": "425dfc7e2dca7f16",
+        "type": "function",
+        "z": "42e0e1b0254ccefa",
+        "name": "function 2",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 400,
+        "wires": [
+            [
+                "e232130847f250e8"
+            ]
+        ]
+    },
+    {
+        "id": "e232130847f250e8",
+        "type": "debug",
+        "z": "42e0e1b0254ccefa",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "b9fdf8359ae11942",
+        "type": "debug",
+        "z": "42e0e1b0254ccefa",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 280,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "ede57366073af8ec",
+        "type": "mysql",
+        "z": "42e0e1b0254ccefa",
+        "mydb": "4b1197c3234b249d",
+        "name": "database rain",
+        "x": 680,
+        "y": 100,
+        "wires": [
+            [
+                "6a8f35001f6c1955"
+            ]
+        ]
+    },
+    {
+        "id": "6a8f35001f6c1955",
+        "type": "debug",
+        "z": "42e0e1b0254ccefa",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "86d2642428f5be6e",
+        "type": "mqtt-broker",
+        "name": "lora-rain-gauge",
+        "broker": "eu1.cloud.thethings.network",
+        "port": "1883",
+        "tls": "",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "5870b7d77809fcf3",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "50e0dbe9a6f0c911",
+        "order": 1,
+        "disp": true,
+        "width": "10",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4b1197c3234b249d",
+        "type": "MySQLdatabase",
+        "name": "database-rain",
+        "host": "localhost",
+        "port": "3306",
+        "db": "rain_db",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "50e0dbe9a6f0c911",
+        "type": "ui_tab",
+        "name": "Rain",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
